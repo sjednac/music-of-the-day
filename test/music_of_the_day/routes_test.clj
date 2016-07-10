@@ -7,7 +7,17 @@
                           :uri "/"})]
     (is (= 200 (:status resp)))))
 
-(deftest test-show-recommendations
+(deftest test-list-recommendations
   (let [resp (all-routes {:request-method :get
                           :uri "/recommendations"})]
     (is (= 200 (:status resp)))))
+
+(deftest test-get-recommendation-by-id
+  (let [resp (all-routes {:request-method :get
+                          :uri "/recommendation/598173f8-f215-4cda-82c9-03ffa081706e"})]
+    (is (= 200 (:status resp)))))
+
+(deftest test-get-recommendation-by-missing-id
+  (let [resp (all-routes {:request-method :get
+                          :uri "/recommendation/ffffffff-ffff-ffff-ffff-ffffffffffff"})]
+    (is (= 404 (:status resp)))))

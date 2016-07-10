@@ -10,10 +10,20 @@
    :headers {"Content-Type" "text/html"}
    :body    "Music of the day!"})
 
-(defn show-recommendations [req]
+(defn list-recommendations [req]
   (util/response data/recommendations))
+
+(defn get-recommendation-by-id [req]
+  (let [id (-> req :params :id)]
+    (let [result (first (filter #(= (:id %) id) data/recommendations))]
+      (if (nil? result)
+        (util/not-found "Recomendation not found")
+        (util/response result)))))
+
 
 (defroutes all-routes
   (GET "/" [] show-landing-page)
-  (GET "/recommendations" [] (json/wrap-json-response show-recommendations))
+  (GET "/recommendations" [] (json/wrap-json-response list-recommendations))
+  (context "/recommendation/:id" []
+         (GET "/" [] (json/wrap-json-response get-recommendation-by-id)))
   (route/not-found "Page not found."))
