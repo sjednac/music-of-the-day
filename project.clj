@@ -6,6 +6,7 @@
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [http-kit "2.1.18"]
                  [ring/ring-core "1.4.0"]
+                 [ring/ring-json "0.4.0"]
                  [javax.servlet/servlet-api "2.5"]
                  [compojure "1.5.1"]]
   :main ^:skip-aot music-of-the-day.core
