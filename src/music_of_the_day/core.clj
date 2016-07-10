@@ -1,7 +1,8 @@
 (ns music-of-the-day.core
   (:gen-class)
   (:use [org.httpkit.server :only [run-server]]
-        [music-of-the-day.routes :only [routes]]
+        [compojure.handler :only [site]] 
+        [music-of-the-day.routes :only [all-routes]]
         [music-of-the-day.config :only [config]]))
 
 (defn -main
@@ -9,4 +10,4 @@
   [& args]
   (let [ip (config :ip) port (config :port)]
     (println "Starting server at port" ip ":" port)
-    (run-server routes {:ip ip :port port})))
+    (run-server (site #'all-routes) {:ip ip :port port})))
