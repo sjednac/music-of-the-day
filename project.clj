@@ -8,5 +8,8 @@
                  [compojure "1.5.1"]]
   :main ^:skip-aot music-of-the-day.core
   :target-path "target/%s"
-  :plugins [[lein-auto "0.1.2"]]
+  :plugins [[lein-auto "0.1.2"]
+            [com.palletops/uberimage "0.4.1"]]
+  :uberimage {:instructions ["RUN apt-get update && apt-get -y install telnet"]
+              :tag "sbilinski/music-of-the-day:latest"}
   :profiles {:uberjar {:aot :all}})
