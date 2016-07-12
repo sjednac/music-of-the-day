@@ -1,6 +1,6 @@
 # music-of-the-day
 
-A simple web service written in **Clojure**.
+A simple web service in **Clojure**.
 
 ## Docker Deployment
 
