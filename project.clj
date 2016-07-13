@@ -8,7 +8,8 @@
                  [ring/ring-core "1.4.0"]
                  [ring/ring-json "0.4.0"]
                  [javax.servlet/servlet-api "2.5"]
-                 [compojure "1.5.1"]]
+                 [compojure "1.5.1"]
+                 [overtone/at-at "1.2.0"]]
   :main ^:skip-aot music-of-the-day.core
   :target-path "target/%s"
   :plugins [[lein-auto "0.1.2"]
