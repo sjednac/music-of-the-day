@@ -11,11 +11,11 @@
    :body    "Music of the day!"})
 
 (defn list-recommendations [req]
-  (util/response data/recommendations))
+  (util/response (deref data/recommendations)))
 
 (defn get-recommendation-by-id [req]
   (let [id (-> req :params :id)]
-    (let [result (first (filter #(= (:id %) id) data/recommendations))]
+    (let [result (first (filter #(= (:id %) id) (deref data/recommendations)))]
       (if (nil? result)
         (util/not-found "Recomendation not found")
         (util/response result)))))
