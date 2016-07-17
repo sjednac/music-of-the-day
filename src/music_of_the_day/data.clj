@@ -1,5 +1,6 @@
 (ns music-of-the-day.data
-  (:use [music-of-the-day.spotify :only [get-new-releases]]))
+  (:use [music-of-the-day.spotify :only [get-new-releases]]
+        [taoensso.timbre :as timbre :refer [log info debug]]))
 
 (def recommendations (atom []))
 
@@ -34,9 +35,11 @@
   "Provides a list of recommendations from Spotify."
   []
   (let [albums (get-new-releases "pl")]
+    (debug "Got" (count albums) "albums from Spotify")
     (map spotify-album-to-recommendation albums)))
 
 (defn update-recommendations
   "Updates recommendations"
   []
+  (info "Updating recommendations...")
   (reset! recommendations (spotify-recommendations)))
