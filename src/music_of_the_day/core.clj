@@ -11,6 +11,8 @@
   "Server entry point."
   [& args]
   (let [ip (config :ip) port (config :port) update-interval (config :recommendation-update-interval)]
+    (println "Fetching initial recommendations")
+    (update-recommendations)
     (println "Scheduling recommendation updates every" update-interval "ms")
     (every update-interval update-recommendations (mk-pool) :desc "Recommendation Updater")
     (println "Binding server to" ip ":" port)
