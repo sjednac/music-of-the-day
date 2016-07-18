@@ -1,0 +1,8 @@
+motd:
+  image: sbilinski/music-of-the-day:latest
+  container_name: "motd"
+  ports:
+   - "8080:8080"
+  environment:
+   - SPOTIFY_CLIENT_ID=$SPOTIFY_CLIENT_ID
+   - SPOTIFY_CLIENT_SECRET=$SPOTIFY_CLIENT_SECRET
