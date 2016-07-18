@@ -1,13 +1,16 @@
 (ns music-of-the-day.spotify
-  (:use [music-of-the-day.config :only [config]])
+  (:use [environ.core :refer [env]])
   (:import (com.wrapper.spotify Api)))
 
 (defn api []
   "Creates a base API object."
-  (-> (Api/builder )
-      (.clientId (config :spotify-client-id ))
-      (.clientSecret (config :spotify-client-secret))
-      (.build)))
+  (let [client-id (env :spotify-client-id) client-secret (env :spotify-client-secret)]
+    (if (nil? client-id) (throw (IllegalStateException. "spotify client id was not specified")))
+    (if (nil? client-secret) (throw (IllegalStateException. "spotify client secret was not specified")))
+    (-> (Api/builder )
+        (.clientId client-id)
+        (.clientSecret client-secret)
+        (.build))))
 
 (defn api-token [token]
   "Creates an API object with token-based authentication."
